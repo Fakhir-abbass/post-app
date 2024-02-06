@@ -9,6 +9,7 @@ import Posts from "./posts";
 import PostDetail from "./postDetail";
 import { Home } from "./home";
 import AddPost from "./addpost";
+import EditPost from "./editPost";
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/posts/:id/edit" element={<EditPost />} />
           <Route path="/addPost" element={<AddPost />} />
         </Routes>
       </Router>{" "}

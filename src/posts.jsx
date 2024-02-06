@@ -53,7 +53,6 @@ const Posts = () => {
          <div className="container">
         <div className="row justify-content-center">
             <div className="col-lg-8">
-   
               <Link to="/addPost" className='btn btn-info'>Add Post</Link>
                {postData.map((items, index) =>(
                  <div className=" mt-5" key={index}>
@@ -61,6 +60,7 @@ const Posts = () => {
                 <h2>{items.title}</h2>
                  <p>{items.body}</p>
                  <Link  to={`/posts/${items.id}`}>Read more</Link>
+                 <Link to ={`/posts/${items.id}/edit`} className='ms-3'>Edit Post</Link>
                  <button onClick={ () => handleDelete(items.id)} className='ms-3 border-0 text-danger'>Delete</button>
                  {postIdtoDelate === items.id && (
                 <div className="bg-success text-center p-5">
