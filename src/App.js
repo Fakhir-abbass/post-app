@@ -8,6 +8,7 @@ import Header from "./Web-Layout/Header/Header";
 import Posts from "./posts";
 import PostDetail from "./postDetail";
 import { Home } from "./home";
+import AddPost from "./addpost";
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/addPost" element={<AddPost />} />
         </Routes>
       </Router>{" "}
     </div>
