@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { baseUrl } from './configue/configue';
+import CircularProgress from '@mui/material/CircularProgress';
 const Posts = () => {
   const [postData, setPostData] = useState([])
   const [postIdtoDelate, setPostIdtoDelate]=useState(null)
@@ -46,14 +47,14 @@ const Posts = () => {
     fetchData();
   }, []);
   if(loading){
-    return <din>Loading....</din>
+    return   <CircularProgress />
   }
     return ( 
       <section className="blog-wrapper">
          <div className="container">
         <div className="row justify-content-center">
             <div className="col-lg-8">
-              <Link to="/addPost" className='btn btn-info'>Add Post</Link>
+              <Link to="/addPost" className='btn btn-info'> {loading ?('Loading ...'):( 'Add Post')}  </Link>
                {postData.map((items, index) =>(
                  <div className=" mt-5" key={index}>
                
@@ -61,11 +62,11 @@ const Posts = () => {
                  <p>{items.body}</p>
                  <Link  to={`/posts/${items.id}`}>Read more</Link>
                  <Link to ={`/posts/${items.id}/edit`} className='ms-3'>Edit Post</Link>
-                 <button onClick={ () => handleDelete(items.id)} className='ms-3 border-0 text-danger'>Delete</button>
+                 <button onClick={ () => handleDelete(items.id)} className='ms-3 border-0 text-danger'>{loading ?('Loading ...'):( 'Delete')} </button>
                  {postIdtoDelate === items.id && (
                 <div className="bg-success text-center p-5">
                    <p>Are you sure you want to delete this post?</p>
-                   <button onClick={()=>confirmDelete(items.id)} className='btn btn-danger'>Yes</button>
+                   <button onClick={()=>confirmDelete(items.id)} className='btn btn-danger'>{loading ?('Loading ...'):( 'Yes')}</button>
                   <button onClick={() => setPostIdtoDelate(null)} className='btn btn-warning ms-3'>No</button>
                 </div>
                  )}

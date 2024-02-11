@@ -8,7 +8,7 @@ import Header from "./Web-Layout/Header/Header";
 import Posts from "./posts";
 import PostDetail from "./postDetail";
 import { Home } from "./home";
-import AddPost from "./addpost";
+import AddPost from "./addPost";
 import EditPost from "./editPost";
 function App() {
   return (

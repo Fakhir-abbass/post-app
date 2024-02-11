@@ -9,9 +9,12 @@ const AddPost = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setInputs((prev) => {
-      return { ...prev, [name]: value };
-    });
+    // Validate positive numbers for userId
+    if (name === "userId" && /^\d*$/.test(value)) {
+      setInputs((prev) => ({ ...prev, [name]: value }));
+    } else if (name !== "userId") {
+      setInputs((prev) => ({ ...prev, [name]: value }));
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +37,7 @@ const AddPost = () => {
       alert("Please enter a title with at least 5 characters.");
     }
     if (inputs.body.length > 500) {
+      // console.log("Character count exceeded 500");
       alert("exceed limit you can enter maximum 500 characters.");
     }
     if (parseInt(inputs.userId) < 0) {
@@ -45,45 +49,52 @@ const AddPost = () => {
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-lg-5">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <input
-                type="number"
-                className="form-control"
-                id="id"
-                name="userId"
-                placeholder="userId"
-                value={inputs.userId}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <input
-                type="text"
-                className="form-control"
-                id="text"
-                name="title"
-                value={inputs.title}
-                onChange={handleChange}
-                placeholder="title"
-              />
-            </div>
-            <div className="mb-3">
-              <textarea
-                className="form-control"
-                rows="5"
-                id="comment"
-                name="body"
-                placeholder="body"
-                value={inputs.body}
-                onChange={handleChange}
-              ></textarea>
-            </div>
+          <div className="card p-5">
+            <form onSubmit={handleSubmit}>
+              <h3>Add Post</h3>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="id"
+                  name="userId"
+                  placeholder="userId *"
+                  required
+                  value={inputs.userId}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="text"
+                  name="title"
+                  value={inputs.title}
+                  onChange={handleChange}
+                  placeholder="title *"
+                  required
+                />
+              </div>
+              <div className="mb-3">
+                <textarea
+                  className="form-control"
+                  rows="5"
+                  id="comment"
+                  name="body"
+                  placeholder="body *"
+                  value={inputs.body}
+                  onChange={handleChange}
+                  required
+                ></textarea>
+                <p className="mt-3">Character Count: {inputs.body.length}</p>
+              </div>
 
-            <button type="submit" className="btn btn-primary">
-              Add Post
-            </button>
-          </form>
+              <button type="submit" className="btn btn-primary">
+                Add Post
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
